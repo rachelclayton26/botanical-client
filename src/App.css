@@ -1,38 +1,147 @@
+@import url('http://fonts.cdnfonts.com/css/pr8-charade');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a{
+  text-decoration: none;
+}
+/* NAVBAR */
+
+.navbar.navbar-expand-lg.navbar-light{
+  padding: 0pt;
+  background-color: white;
+  height: 50pt;
+  margin-left: 10pt;
+  margin-right: 10pt;
+  /* background-color: lightyellow; */
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.container-fluid{
+  /* background: lightpink; */
+  height: 80pt;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#logo {
+  font-family: "Montserrat";
+  font-weight: 600;
+  text-decoration: #ffffff00 !important;
+  font-size: 23pt;
+  letter-spacing: 2pt;
+  padding-left: 17pt;
+  padding-right: 17pt;
+  /* float: center;
+  height: 27pt; */
+}
+
+.logoContainter{
+  height: 50pt;
+  line-height: 70pt;
+}
+
+.navbar-nav {
+  margin-top: 20pt;
+  width: 95%;
+  /* background: lightyellow; */
+}
+
+.nav-item{
+  margin-top: 15pt;
+  width: 100%;
+  height: 45pt;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* background: lightblue; */
+}
+
+.nav-item-item{
+  font-family: "Montserrat";
+  font-weight: 600;
+  font-size: 10pt;
+  margin-top: 20pt;
+  height: 0pt;
+  text-align: center;
+  display: flex;
+  color: black;
+  text-decoration: none;
+}
+
+#cityName {
+  background: #f7f5f2;
+  width: 300%;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.cityNameLable{
+  font-family: "Montserrat";
+  font-weight: 600;
+  font-size: 10pt;
+  padding-right: 5pt;
+  text-transform: uppercase;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cityNameFont{
+  padding-left: 5pt;
+  margin-top: -15pt;
+  font-family: "PR8 Charade";
+  font-weight: normal;
+  font-size: 27pt;
+}
+
+.underline{
+  font-size: 20pt;
+  margin-top: -33pt;
+}
+
+
+/* HOME */
+
+.homeContainer{
+  margin-top: 15pt;
+  margin-bottom: 15pt;
+  margin-left: 19pt;
+  margin-right: 19pt;
+  height: 800pt;
+  background-color: #f7f5f2;
+}
+
+
+/* MY FAVORITES */
+
+.myFavContainer{
+  margin-top: 15pt;
+  margin-bottom: 15pt;
+  margin-left: 19pt;
+  margin-right: 19pt;
+  height: 800pt;
+  background-color: #f7f5f2;
+}
+
+
+/* ADMIN */
+
+.adminContainer{
+  margin-top: 15pt;
+  margin-bottom: 15pt;
+  margin-left: 19pt;
+  margin-right: 19pt;
+  height: 800pt;
+  background-color: #f7f5f2;
+}
+
+
+/* FOOTER */
+
+.footer{
+background-color: #404041;
+color: rgb(177, 177, 177);
+text-align: center;
+height: 120pt;
+line-height: 120pt;
+text-transform: uppercase;
+letter-spacing: 1pt;
+font-size: 9pt;
 }
