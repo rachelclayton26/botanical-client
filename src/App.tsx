@@ -7,6 +7,8 @@ import MyFavorites from './components/MyFavorites';
 import Footer from './components/Footer';
 // import LoginSignUp from './components/LoginSignUp';
 
+require('dotenv').config();
+
 type GeoState = {
   cityName: string | null,
   zipCode: string | null
@@ -22,13 +24,14 @@ class FetchGeo extends React.Component <{}, GeoState>{
     }
   };
   
-    componentDidMount() {
+componentDidMount() {
       this.FetchLocation();
+      console.log("component mounted 1")
    }
 
 FetchLocation = () => {
   console.log("component mounted") 
-    const key: string= "AIzaSyA60T7NoarUbeA_bfM_zeq6m3dkTcTkTiQ"
+    const key: string= `${process.env.PORT}`
     
     navigator.geolocation.getCurrentPosition((position) => {
         let lat: number= position.coords.latitude;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 // type geoData = {
 //   results: Array<{
 //       address_components: Array<{

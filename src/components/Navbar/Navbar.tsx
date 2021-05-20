@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // import SignupLogin from "./SignupLogin";
 import {Link} from "react-router-dom";
-import LogoImg from "./logo.png";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
