@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Row, Col } from 'reactstrap';
-import favorite_border, {colorPalette} from 'material-design-icons';
 
 // type geoData = {
 //   results: Array<{
@@ -33,7 +32,7 @@ type PlantResults = {
     description: string,
 }
 
-class Home extends Component <any, ZipState>{
+class Home2 extends Component <any, ZipState>{
 
     constructor() {
         super('')
@@ -62,35 +61,16 @@ class Home extends Component <any, ZipState>{
       };
       
       componentDidMount() {
-           this.FetchZone();
+           this.FetchZonePlants();
            console.log("component mounted 1")
         }
-    
-    FetchZone = () => {
-        let zipCode= this.props.zipCode
-        fetch(`https://phzmapi.org/${zipCode}.json`)
-            .then(res => res.json())
-            .then((data) => {
-                // console.log(data)
-                this.setState({
-                    zone: data.zone.split("")[0]
-                })
-                // console.log(this.state.zone);
-                this.FetchZonePlants()
-            })
-            .catch(console.log)
-        };
-
-//How do I call this second function?? And how do I make it wait for the FetchZone function to complete it's zone fetch and set the current state for zone? Also, this route in not working on the client side...why?
 
     FetchZonePlants = () => {
-        let zone= this.state.zone
-        console.log(zone)
-        fetch(`https://botanical-app.herokuapp.com/plant/zone/${zone}`)
+        fetch(`https://botanical-app.herokuapp.com/plant/getAll`)
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
-                this.RandomPlant(data.plantByZone)
+                this.RandomPlant(data)
             })
             .catch(console.log)
     }
@@ -104,11 +84,6 @@ class Home extends Component <any, ZipState>{
             this.setState({plantResults: a})
     }
 
-    showOtherPic = (e, plant) => {
-        e.preventDefault();
-            return <img className="cardImgThree" src={plant.img3} />
-        }
-
     render() {
     return (
         <div>
@@ -117,12 +92,7 @@ class Home extends Component <any, ZipState>{
                     <div className="row">
                    {this.state.plantResults.map((plant) => {
                         return  <div className="cardHolder col-sm-4 col-md-4 col-lg-4 col-xl-4" key={plant.id}>
-                                    <div className="likeButtons">
-                                        <button className="likeButton">save</button>
-                                    </div>
-                                        <img className="cardImg" src={plant.img}  onMouseEnter={(e) => this.showOtherPic(e, plant)}/>
-                                        <img className="cardImgThree" src={plant.img3} />
-                                        {/* {console.log(plant.img3)} */}
+                                        <img className="cardImg" src={plant.img} />
                                         <div className="cardTitle">{plant.commonPlantName}</div>
                                 </div>
                    })
@@ -134,6 +104,4 @@ class Home extends Component <any, ZipState>{
         )
     }
 }
-export default Home;
-
-// onMouseEnter={(e) => {console.log(e.target)}}}
+export default Home2;

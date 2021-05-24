@@ -6,19 +6,78 @@
 }
 
 a{
-  text-decoration: none;
+  text-decoration: none !important;
+}
+
+a:hover{
+  color: #5f8641 !important;
 }
 /* NAVBAR */
 
 .navbar.navbar-expand-lg.navbar-light{
   padding: 0pt;
-  background-color: white;
-  height: 50pt;
+  background-color: none !important;
+  height: 80pt;
   margin-left: 10pt;
   margin-right: 10pt;
   /* background-color: lightyellow; */
-
 }
+
+.ReactModal__Overlay.ReactModal__Overlay--after-open{
+  background-color: #9a928854 !important;
+  position: relative;
+  z-index: 2;
+}
+.ReactModal__Content.ReactModal__Content--after-open{
+ width: 55%;
+ margin-left: auto;
+ margin-right: auto;
+ border: none !important;
+ background-color: #f7f5f2 !important;
+ padding-top: 60pt !important;
+ padding-bottom: 60pt !important;
+ padding-left: 80pt !important;
+ padding-right: 80pt !important;
+ position: relative;
+ z-index: 2;
+}
+
+.modalTitle{
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 20pt;
+  text-align: center;
+  margin-bottom: 15pt;
+  color: #346633;
+}
+
+.togglerButton{
+  display: flex;
+}
+
+.closeModal{
+  width: 25pt;
+  height: 25pt;
+  border: 0pt;
+  background-color: #f7f5f2;
+  color:#404041;
+  font-family: "Montserrat";
+  font-weight:600;
+  position:relative;
+  /* z-index: 1; */
+  /* margin-top: -50pt;
+  margin-right: -70pt; */
+  font-size: 18pt;
+  line-height: 20pt;
+  text-align: center;
+  letter-spacing: 0;
+  float: right;
+}
+
+.closeModal:hover{
+  color: #346633;
+}
+
 
 .container-fluid{
   /* background: lightpink; */
@@ -43,7 +102,7 @@ a{
 }
 
 .navbar-nav {
-  margin-top: 20pt;
+  margin-top: 50pt;
   width: 95%;
   /* background: lightyellow; */
 }
@@ -51,7 +110,7 @@ a{
 .nav-item{
   margin-top: 15pt;
   width: 100%;
-  height: 45pt;
+  height: 50pt;
   display: flex;
   /* background: lightblue; */
 }
@@ -66,6 +125,24 @@ a{
   display: flex;
   color: black;
   text-decoration: none;
+}
+
+.loginSignUp{
+  font-family: "Montserrat";
+  font-weight: 600;
+  font-size: 10pt;
+  margin-top: 19pt;
+  height: 30pt;
+  text-align: center;
+  display: flex;
+  color: black;
+  text-decoration: none;
+  border: 0pt;
+  background: none;
+}
+
+.loginSignUp:hover{
+  color: #5f8641;
 }
 
 #cityName {
@@ -97,6 +174,67 @@ a{
 }
 
 
+/* NAVBAR2 */
+
+#nav2 {
+  width: 76%
+}
+
+#loginLogoutadmin{
+  padding-left: 30pt;
+}
+
+#CRUDButtons {
+  background: #f7f5f2;
+  width: 150%;
+  display: flex;
+  justify-content: center;
+}
+
+#CRUDButtons:hover {
+  background: #5f8641;
+}
+
+.updateEditDelete{
+  font-family: "Montserrat";
+  font-weight: 600;
+  font-size: 10pt;
+  padding-right: 5pt;
+  text-transform: uppercase;
+  color: black !important;
+}
+
+.updateEditDelete:hover{
+  color: white !important;
+}
+
+
+/* DETAILS */
+.detailsContainer{
+  margin-top: 15pt;
+  margin-bottom: 15pt;
+  margin-left: 19pt;
+  margin-right: 19pt;
+  height: 100%;
+  background-color: #f7f5f2;
+}
+
+.detailsText{
+  background-color: #efebe6;
+}
+
+.iconGuide{
+  background-color: #e87a24;
+}
+
+.detailLivePic {
+  width: 200pt;
+}
+
+.detailDrawnPic{
+  width: 200pt;
+}
+
 /* HOME */
 
 .homeContainer{
@@ -104,10 +242,82 @@ a{
   margin-bottom: 15pt;
   margin-left: 19pt;
   margin-right: 19pt;
-  height: 800pt;
+  height: 100%;
   background-color: #f7f5f2;
 }
 
+.PlantImgContainer{
+  padding-top: 80pt;
+  padding-bottom: 80pt;
+  margin-left: 80pt;
+  margin-right: 80pt;
+  height: 100%;
+}
+
+.cardHolder{
+width: 100%;
+margin-bottom: 45pt;
+}
+
+.cardImg {
+  width: 100%;
+}
+
+.cardImg:hover {
+  display: none;
+}
+
+.cardImgThree{
+ width: 100%;
+ display: none;
+}
+
+/* .cardImgThree:hover{
+  width: 100%;
+  display:flex;
+ } */
+
+ .likeButtons{
+  padding-top: 10pt;
+  margin-bottom: -37pt;
+  padding-left:  12pt;
+  padding-right: 12pt;
+  text-align: end;
+}
+
+.likeButton {
+  width: 60pt;
+  height: 25pt;
+  border: 0pt;
+  background-color: #f7f5f2;
+  border-radius: 3pt;
+  font-size: 12pt;
+  line-height: 25pt;
+  color: #346633;
+  font-family: "Montserrat";
+  font-weight: 600;
+  letter-spacing: 1pt;
+  position:relative;
+  z-index: 1;
+}
+.likeButton:hover {
+  background-color: #346633;
+  color: white;
+}
+
+.cardTitle {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 13pt;
+  font-family: "Montserrat";
+  font-weight: 600;
+  margin-top: -50px;
+  letter-spacing: 1pt;
+}
+
+.cardHolder.col-sm-4.col-md-4.col-lg-4.col-xl-4 {
+  padding: 25pt;
+}
 
 /* MY FAVORITES */
 
@@ -133,11 +343,185 @@ a{
 }
 
 
+/* CREATE */
+.createContainer{
+  margin-top: 15pt;
+  margin-bottom: 15pt;
+  margin-left: 19pt;
+  margin-right: 19pt;
+  height: 100%;
+  padding-bottom: 55pt;
+  background-color: #f7f5f2;
+}
+
+.createForm{
+  width: 50%;
+  padding-top: 40pt;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.formTitle {
+  text-align: center;
+  text-transform: lowercase;
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 20pt;
+  letter-spacing: 2pt;
+  color: #5f8641;
+  padding: 15pt;
+}
+
+.checkboxes{
+  margin-top:-10pt;
+  margin-bottom:25pt;
+}
+
+.formLable {
+  text-transform: lowercase;
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 11pt;
+  letter-spacing: 1pt;
+  color: #5f8641;
+  padding-top: 25pt;
+  padding-bottom: 5pt;
+}
+
+.form-control{
+  border-radius: 0pt !important;
+  border: none !important;
+  margin-bottom: 15pt;
+}
+
+.form-check-label{
+  font-size: 10pt;
+  font-weight: 400;
+}
+
+.btn.btn-primary{
+  margin-top: 10pt;
+  width: 100%;
+  background-color: #5f8641;
+  border-radius: 0pt;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 1pt;
+  font-family: "Montserrat";
+  font-weight: 600;
+}
+
+.btn.btn-primary:hover{
+  width: 100%;
+  background-color: pink;
+  border-radius: 0pt;
+  border: none;
+}
+
+
+/* EDIT-DELETE */
+
+.editContainer{
+  margin-top: 15pt;
+  margin-bottom: 15pt;
+  margin-left: 19pt;
+  margin-right: 19pt;
+  height: 100%;
+  padding-bottom: 55pt;
+  background-color: #f7f5f2;
+}
+
+.PlantImgContainer2{
+  padding-top: 80pt;
+  padding-bottom: 80pt;
+  margin-left: 95pt;
+  margin-right: 95pt;
+  height: 100%;
+}
+
+.editDeleteButtons{
+  padding-top: 10pt;
+  margin-bottom: -37pt;
+  padding-left:  12pt;
+  padding-right: 12pt;
+  position: relative;
+  z-index: 1;
+  text-align: end;
+  display: flex;
+  float: right;
+}
+
+.editButton {
+  width: 60pt;
+  height: 25pt;
+  border: 0pt;
+  background-color: #346633;
+  border-radius: 3pt;
+  font-size: 12pt;
+  line-height: 25pt;
+  color: white;
+  font-family: "Montserrat";
+  font-weight: 600;
+  letter-spacing: 1pt;
+  position:relative;
+  z-index: 1;
+}
+.editButton:hover {
+  background-color: white;
+  color:#346633;
+}
+
+
+.deleteButton {
+  width: 25pt;
+  height: 25pt;
+  border-radius: 3pt;
+  border: 0pt;
+  background-color: #346633;
+  color: white;
+  font-family: "Montserrat";
+  font-weight:600;
+  position:relative;
+  z-index: 1;
+  margin-left: 2pt;
+  font-size: 14pt;
+  text-align: center;
+  letter-spacing: 0;
+}
+
+.deleteButton:hover {
+  background-color: white;
+  color:#346633;
+}
+
+.updateForm{
+  width: 70%;
+  padding-top: 40pt;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#editModal {
+  width: 55%;
+ margin-left: auto;
+ margin-right: auto;
+ border: none !important;
+ background-color: #f7f5f2 !important;
+ padding-top: 0pt !important;
+ padding-bottom: 0pt !important;
+ padding-left: 0pt !important;
+ padding-right: 0pt !important;
+ position: relative;
+ z-index: 2;
+}
+
+
+
 /* FOOTER */
 
 .footer{
 background-color: #404041;
-color: rgb(177, 177, 177);
+color: #b1b1b1;
 text-align: center;
 height: 120pt;
 line-height: 120pt;
