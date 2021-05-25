@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Modal from 'react-modal';
-
+import { Modal } from 'reactstrap'
+import APIURL from "../../helpers/enviornment";
 
 type Nav = {
     cityName: string | null;
@@ -11,7 +11,17 @@ type Nav = {
     lastName: string;
     email: string;
     password: string;
-    isLoggingIn: boolean
+    isLoggingIn: boolean;
+    user: User;
+  }
+
+type User = {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    isAdmin: boolean
   }
 
 class Navbar extends Component<any, Nav>{
@@ -24,11 +34,18 @@ class Navbar extends Component<any, Nav>{
             lastName: "",
             email: "",
             password: "",
-            isLoggingIn: false
+            isLoggingIn: false,
+            user: {
+                id: 0,
+                firstName: "''",
+                lastName: "",
+                email: "",
+                password: "",
+                isAdmin: false
+              }
         }
       };
 
-//props cityname
     componentDidMount(){
         console.log(this.props.cityName)
         this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -39,8 +56,14 @@ class Navbar extends Component<any, Nav>{
         this.setState({ showModal: true });
       }
     
-      handleCloseModal = () => {
-        this.setState({ showModal: false });
+      handleCloseModal = (data) => {
+        this.setState({ 
+            showModal: false,
+            user: data
+        });
+        setTimeout(() => {
+            console.log(this.state.user)
+        }, 500)
       }
     
      modalState = () => {
@@ -63,7 +86,7 @@ class Navbar extends Component<any, Nav>{
     handleSubmit= (e) => {
         console.log(this.state)
         e.preventDefault();
-        fetch("http://localhost:3000/user/register", {
+        fetch(`${APIURL}/user/register`, {
             method: 'POST',
             body: JSON.stringify({
                 user: {
@@ -82,7 +105,7 @@ class Navbar extends Component<any, Nav>{
             console.log(data)
             this.props.updateToken(data.sessionToken)
             this.props.AdminCheck(data)
-            this.handleCloseModal()
+            this.handleCloseModal(data)
         }) 
         .catch((err) => console.log(err))
         this.setState({
@@ -96,7 +119,9 @@ class Navbar extends Component<any, Nav>{
     handleSubmit2= (e) => {
         console.log(this.state)
         e.preventDefault();
-        fetch("http://localhost:3000/user/login", {
+        console.log(this.state)
+        console.log(APIURL)
+        fetch(`${APIURL}/user/login`, {
             method: 'POST',
             body: JSON.stringify({
                 user: {
@@ -113,15 +138,19 @@ class Navbar extends Component<any, Nav>{
             console.log(data)
             this.props.updateToken(data.sessionToken)
             this.props.AdminCheck(data)
-            this.handleCloseModal()
+            this.handleCloseModal(data)
         }) 
         .catch((err) => console.log(err))
         this.setState({
                     firstName: "",
                     lastName: "",
                     email: "",
-                    password: ""
-        })
+                    password: "",
+                })
+        // this.props.setState({
+        //         isLoggedIn: true
+        // })
+        console.log(this.state)
     }
 
     toggleModal = (e) => {
@@ -150,14 +179,17 @@ class Navbar extends Component<any, Nav>{
             <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <button className="loginSignUp" onClick={this.handleOpenModal}>login/ sign up</button>
+                        {this.props.isLoggedIn ? <button className="nav-item-item" id="loginBtn" onClick={this.props.clearToken}>logout</button> : <button className="nav-item-item" id="loginBtn" onClick={this.handleOpenModal}>login/ sign up</button>}
                         {this.state.isLoggingIn ?  
                         <div className="Modal1">
                             <Modal isOpen={this.modalState()} ariaHideApp={false} id="Modal1">
-                                <div className="topButtons">
-                                    <button className="togglerButton" onClick={(e) => this.toggleModal(e)}>sign up</button>
-                                    <button className="closeModal" onClick={this.handleCloseModal}>x</button>
-                                </div> 
+                            <div className="modalButtons">
+                                <button className="togglerButton" onClick={(e) => this.toggleModal(e)}>sign up</button>
+                                <button className="close" aria-label="Close" onClick={this.handleCloseModal}>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="form">
                                 <div className="modalForm">
                                     <form onSubmit={(e) => this.handleSubmit2(e)} >
                                     <div className="modalTitle">login</div>
@@ -170,13 +202,18 @@ class Navbar extends Component<any, Nav>{
                                     <button type="submit" className="btn btn-primary">Submit</button>
                                     </form>
                                 </div>
+                            </div>
                             </Modal>
                         </div>
                         :
                         <div className="Modal2">
                         <Modal isOpen={this.modalState()} ariaHideApp={false} id="Modal2">
-                        <button className="togglerButton" onClick={(e) => this.toggleModal(e)}>login</button>
-                        <button className="closeModal" onClick={this.handleCloseModal}>x</button>
+                            <div className="modalButtons">
+                                <button className="togglerButton" onClick={(e) => this.toggleModal(e)}>login</button>
+                                    <button className="close" aria-label="Close" onClick={this.handleCloseModal}>
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             <form onSubmit={(e) => this.handleSubmit(e)} >
                             <div className="modalTitle">sign up</div>
                             <div className="form-group">

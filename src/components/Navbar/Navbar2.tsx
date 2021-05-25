@@ -11,7 +11,6 @@ type Nav = {
 class Navbar2 extends Component<any, Nav>{
 //props cityname
     componentDidMount(){
-        console.log(this.props.cityName)
     }
     
     render() {
@@ -33,9 +32,7 @@ class Navbar2 extends Component<any, Nav>{
                 <ul className="navbar-nav" id="nav2">
 
                     <li className="nav-item">
-                             <div className="nav-item-item" id="loginLogoutadmin">logout
-                             {/* <SignupLogin updateToken = {updateToken} clearToken={clearToken} /> */}
-                             </div>
+                        <button className="nav-item-item" id="loginBtn" onClick={this.props.clearToken}>logout</button>    
                     </li>
                     
                     {/* <li className="nav-item">

@@ -1,15 +1,6 @@
 import React, { Component } from 'react';
-import {Row, Col } from 'reactstrap';
-import favorite_border, {colorPalette} from 'material-design-icons';
-
-// type geoData = {
-//   results: Array<{
-//       address_components: Array<{
-//       long_name: string,
-//       }>
-//   }>
-// }
-// botanical fetch
+import APIURL from "../helpers/enviornment";
+import styled from 'styled-components';
 
 type ZipState = {
     zipCode: string | null
@@ -21,7 +12,7 @@ type PlantResults = {
     id: number,
     commonPlantName: string,
     scientificPlantName: string,
-    growthZone: number[],
+    growthZone: number[] | string,
     img: string,
     img2: string,
     img3: string,
@@ -33,13 +24,18 @@ type PlantResults = {
     description: string,
 }
 
+// const CardImg3 = styled.img`
+// &:hover{
+//     background-url: ${plant.img3}
+// }`
+
 class Home extends Component <any, ZipState>{
 
     constructor() {
         super('')
         this.state = {
             zipCode: "",
-            zone: "",
+            zone: "getAll",
             plantResults: [{
                 id: 0,
                 commonPlantName: "",
@@ -86,7 +82,13 @@ class Home extends Component <any, ZipState>{
     FetchZonePlants = () => {
         let zone= this.state.zone
         console.log(zone)
-        fetch(`https://botanical-app.herokuapp.com/plant/zone/${zone}`)
+        console.log(APIURL)
+        fetch(`${APIURL}/plant/zone/${zone}`, {
+            method: "GET",
+            headers: new Headers ({
+                'Content-Type': 'application/json',
+            })
+        })
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
@@ -104,10 +106,12 @@ class Home extends Component <any, ZipState>{
             this.setState({plantResults: a})
     }
 
-    showOtherPic = (e, plant) => {
-        e.preventDefault();
-            return <img className="cardImgThree" src={plant.img3} />
-        }
+    // showOtherPic = (e, plant) => {
+    //     e.preventDefault();
+    //         return <div>
+    //                     <img className="cardImg" src={plant.img3} />
+    //                 </div>
+    //     }
 
     render() {
     return (
@@ -118,11 +122,16 @@ class Home extends Component <any, ZipState>{
                    {this.state.plantResults.map((plant) => {
                         return  <div className="cardHolder col-sm-4 col-md-4 col-lg-4 col-xl-4" key={plant.id}>
                                     <div className="likeButtons">
-                                        <button className="likeButton">save</button>
+                                        <button className="likeButton">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                                            <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+                                        </svg>
+                                        </button>
                                     </div>
-                                        <img className="cardImg" src={plant.img}  onMouseEnter={(e) => this.showOtherPic(e, plant)}/>
-                                        <img className="cardImgThree" src={plant.img3} />
-                                        {/* {console.log(plant.img3)} */}
+                                    <div className="variableImg">
+                                        <img className="cardImg" src={plant.img}/>
+                                        {/* <img className="cardImgThree" src={plant.img3} /> */}
+                                    </div>
                                         <div className="cardTitle">{plant.commonPlantName}</div>
                                 </div>
                    })
