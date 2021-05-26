@@ -122,7 +122,7 @@ AdminCheck = (data) => {
     }
 
 FetchLocation = () => {
-    const APIkey: string= `${process.env.KEY}`
+    const APIkey: string= `${process.env.REACT_APP_KEY}`
     
     navigator.geolocation.getCurrentPosition((position) => {
         let lat: number= position.coords.latitude;
