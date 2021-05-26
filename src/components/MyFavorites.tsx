@@ -4,6 +4,7 @@ import APIURL from "../helpers/enviornment";
 type FavPlantsState = {
     userId: string
     plantResults: any[]
+    favoritePlants: any[]
 }
 type FavPlantsProps = {
     userId: number
@@ -15,7 +16,8 @@ class MyFavorites extends Component <FavPlantsProps, FavPlantsState>{
         super(props)
         this.state = {
             userId: "",
-            plantResults: []     
+            plantResults: [],
+            favoritePlants: []    
         }}
 
         componentDidMount() {
@@ -40,12 +42,16 @@ class MyFavorites extends Component <FavPlantsProps, FavPlantsState>{
                 console.log("item fetched:", data )
                 this.setState ({
                     plantResults: data.favPlants
+                },() => {
+                    this.state.plantResults.map(plant => {
+                        this.FetchFavPlantById(plant.id)
+                    })
                 })
             })
             .catch(console.log)
         }
 
-        FetchFavPlantId = (id:string) => {
+        FetchFavPlantById = (id:string) => {
             console.log(id)
             console.log(APIURL)
             fetch(`${APIURL}/plant/id/${id}`, {
@@ -68,7 +74,7 @@ class MyFavorites extends Component <FavPlantsProps, FavPlantsState>{
                 const j = Math.floor(Math.random() * (i + 1));
                 [a[i], a[j]] = [a[j], a[i]];
             }
-                this.setState({plantResults: a})
+                this.setState({favoritePlants: a})
         }
 
         DeletePlant = (plant: any) => {
@@ -87,7 +93,7 @@ class MyFavorites extends Component <FavPlantsProps, FavPlantsState>{
         <div  className="myFavContainer">
                     <div className="PlantImgContainer">
                     <div className="row">
-                   {this.state.plantResults.map((plant) => {
+                   {this.state.favoritePlants.map((plant) => {
                         return  <div className="cardHolder col-sm-4 col-md-4 col-lg-4 col-xl-4" key={plant.id}>
                                     <div className="likeDeleteButton">
                                         <button className="deleteButton" onClick={(e) => this.DeletePlant(plant.id)}>x</button>

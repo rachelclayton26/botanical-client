@@ -30,6 +30,7 @@ type HomeProps = {
     plantId: number
     zipCode: string | null
     token: string
+    userId: number
 }
 // const CardImg3 = styled.img`
 // &:hover{
@@ -113,7 +114,7 @@ class Home extends Component <HomeProps, ZipState>{
             this.setState({plantResults: a})
     }
 
-    AddFavPlant = (e, plant) => {
+    AddFavPlant = (e, plantId) => {
         e.preventDefault();
         // console.log(this.state.plantId)
         fetch(`${APIURL}/favorite/addfav`, {
@@ -122,9 +123,8 @@ class Home extends Component <HomeProps, ZipState>{
                fav: {
 
 // THIS IS THE ISSUE FOR THE "LIKE BUTTON"-BOTH COME BACK AS 0, THEY ARE ALSO COMING BACK AS 0 ON LINE 183 of EDITDELETE.tsx
-
-                   userId: this.state.userId,
-                   plantId: plant.id
+                   userId: this.props.userId,
+                   plantId: plantId
                }
             }),
             headers: new Headers({
@@ -152,7 +152,7 @@ class Home extends Component <HomeProps, ZipState>{
                         return  <div className="cardHolder col-sm-4 col-md-4 col-lg-4 col-xl-4" key={plant.id}>
                                     <div className="likeButtons">
                                         
-                                        <button className="likeButton" onClick={(e) => this.AddFavPlant(e, plant)}>
+                                        <button className="likeButton" onClick={(e) => this.AddFavPlant(e, plant.id)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-suit-heart-fill" viewBox="0 0 16 16">
                                             <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
                                         </svg>

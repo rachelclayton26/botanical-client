@@ -175,7 +175,7 @@ FetchLocation = () => {
               <MyFavorites userId={this.state.userId} token={this.state.token}/>
             </Route>
             <Route path="/">
-              <Home zipCode= {this.state.zipCode} plantId={this.state.plantId} token={this.state.token}/>
+              <Home zipCode= {this.state.zipCode} plantId={this.state.plantId} token={this.state.token} userId={this.state.userId}/>
             </Route>
           </Switch>
           <Footer />
