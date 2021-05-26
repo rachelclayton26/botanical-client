@@ -122,18 +122,17 @@ AdminCheck = (data) => {
     }
 
 FetchLocation = () => {
-  // console.log(`${process.env.KEY}`) 
     const APIkey: string= `${process.env.KEY}`
     
     navigator.geolocation.getCurrentPosition((position) => {
         let lat: number= position.coords.latitude;
         let lon: number= position.coords.longitude;
         console.log("Latitude is :", position.coords.latitude);
-        console.log("Longitude is :", position.coords.longitude);
+        console.log("Longitude is :", position.coords.longitude)
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${APIkey}`)
         .then(res => res.json())
         .then((data) => {
-            // console.log(data)
+            console.log(data)
             this.setState({
                 cityName: data.results[0].address_components[2].long_name,
                 zipCode: data.results[0].address_components[7].long_name

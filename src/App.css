@@ -225,29 +225,111 @@ a:hover{
 
 
 /* DETAILS */
+
 .detailsContainer{
   margin-top: 15pt;
   margin-bottom: 15pt;
   margin-left: 19pt;
   margin-right: 19pt;
-  height: 100%;
+  height: auto;
   background-color: #f7f5f2;
+  padding-right: 30pt;
+  padding-left: 30pt;
+  padding-bottom: 40pt;
+  padding-top: 40pt
+}
+
+.details{
+  display: flex;
+
+}
+
+.detailsLeft{
+  width: 604pt;
+  
+  /* background-color:  #efebe6; */
+}
+
+.detailsPics{
+  width: 259pt;
+  /* background-color: lightpink; */
+  margin-left: 10pt;
+  margin-right: 10pt;
 }
 
 .detailsText{
+  height: 452pt;
   background-color: #efebe6;
+  padding: 40pt;
+  margin-bottom: 20pt;
+  margin-left: 10pt;
+  margin-right: 10pt;
+  
+}
+.titleBox{
+  padding-bottom: 23pt;
+}
+
+.detailsTitle{
+  font-family: "Montserrat";
+  font-size: 28pt;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1pt;
+  text-align: center;
+}
+
+.detailsScience{
+  font-family: "PR8 Charade";
+  font-size: 32pt;
+  font-weight:normal;
+  letter-spacing: 1pt;
+  text-align: center;
+}
+
+p{
+  font-family: "Montserrat";
+  font-size: 13.75pt;
+  line-height: 158%;
+
 }
 
 .iconGuide{
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  padding: 40pt;
   background-color: #e87a24;
+  height: 180pt;
+  font-family: "Montserrat";
+  text-transform: uppercase;
+  font-size: 11pt;
+  font-weight: 600;
+  letter-spacing: 1pt;
+  color: white;
+  margin-left: 10pt;
+  margin-right: 10pt;
 }
 
+.zoneNumber{
+  font-family: "PR8 Charade";
+  font-size: 42pt;
+  font-weight: lighter;
+  margin-top: 12pt;
+  margin-bottom: auto;
+  /* background-color: lightgreen; */
+}
+
+/* more classes here */
+
 .detailLivePic {
-  width: 200pt;
+  width: 100%;
+  margin-bottom:10pt;
 }
 
 .detailDrawnPic{
-  width: 200pt;
+  width: 100%;
+  margin-top:10pt;
 }
 
 /* HOME */

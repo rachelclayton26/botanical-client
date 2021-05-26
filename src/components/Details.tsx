@@ -5,13 +5,16 @@ class Details extends Component {
     return (
         <div  className="detailsContainer">
 
-        <div className="row col-8">
+        <div className="details">
+                <div className="detailsLeft">
                 <div className="detailsText">
-                    <div className="detailsTitle">Sweet Violet
+                    <div className="titleBox">
+                        <div className="detailsTitle">Sweet Violet
                         {/* {plant.commonPlantName} */}
-                    </div>
-                    <div className="detailsScience">Viola
-                        {/* {plant.scientificPlantName} */}
+                        </div>
+                        <div className="detailsScience">Viola
+                            {/* {plant.scientificPlantName} */}
+                        </div>
                     </div>
                     <p>Viola odorata 'Queen Charlotte' (Sweet Violet) is an evergreen perennial forming a ravishing mound of shiny, heart shaped, dark green leaves. Blooming in late winter and early spring, sweetly-scented, large, dark blue to purple flowers arise above the foliage. Adding fragrance and color when few other plants are at their peak, Sweet Violet is an indispensable perennial for the shade garden. Flowers are excellent for cutting and edible, eat them fresh or candied. First introduced into cultivation in Germany in 1900.
                         {/* {plant.discription} */}
@@ -41,7 +44,7 @@ class Details extends Component {
                 </div>
             </div>
 
-            <div className="row col-1">
+            <div className="detailsPics">
                 <div className="picOne">
                     <img className="detailLivePic" src="https://res.cloudinary.com/djdrsujro/image/upload/v1621277919/Botanical-App/violets_uikr3j.jpg"></img>
                 </div>
@@ -50,6 +53,7 @@ class Details extends Component {
                 </div>
             </div>
 
+            </div>
             </div>
         )
     }
