@@ -10,6 +10,7 @@ import EditDelete from './components/EditDelete';
 import MyFavorites from './components/MyFavorites';
 import Footer from './components/Footer';
 import Details from './components/Details';
+import APIURL from "./helpers/enviornment";
 
 require('dotenv').config();
 
@@ -21,6 +22,7 @@ type GeoState = {
   token: string
   isLoggedIn: boolean
   plantId: number
+  userId: number
 }
 
 //In order to call functions/methods in the App.tsx (root) file of your react legacy application, you must change the function App() to a class component--ie. class App extends React.Component, then if using typscript, must call the interface or type after that class declaration (see below)
@@ -28,14 +30,16 @@ type GeoState = {
 class App extends React.Component<{}, GeoState> {
   constructor() {
     super('')
+    let tmpToken= localStorage.getItem("token")
     this.state = {
         cityName: "Everywhere",
         zipCode: "46280",
         searching: false,
         isAdmin: false,
-        token: "",
+        token: tmpToken? tmpToken : "",
         isLoggedIn: false,
-        plantId: 0
+        plantId: 0,
+        userId: 0
     }
   };
 
@@ -45,11 +49,29 @@ Searching = () => {
  })
 }
 
+updateUserId = (userId) => {
+  this.setState({
+     userId: userId
+  })
+ }
+
 updateToken = (token) => {
-  console.log(token)
+  // console.log(token)
   localStorage.setItem("token", token)
   this.setState({
      token: token
+  }, () => {
+    fetch(`${APIURL}/user`,
+    { headers: 
+      { "Authorization": "Bearer "+this.state.token }})
+      .then (res => res.json)
+      .then ((data: any) => {
+        if(data.user) {
+          this.setState({
+            isAdmin: data.user.isAdmin
+          })
+        }
+      })
   })
  }
 
@@ -70,45 +92,54 @@ updateToken = (token) => {
    }
  }
  
-AdminCheck = (isAdmin) => {
-  if(isAdmin === undefined){
-    this.setState ({
-      isAdmin: false
-    })
-  } else {
-  console.log(isAdmin.user.isAdmin)
-  this.setState({
-    isAdmin: isAdmin.user.isAdmin
-  })
+AdminCheck = (data) => {
+  if(data) {
+    if(data.user) {
+      this.setState({
+        isAdmin: data.user.isAdmin
+      })
+    }
+  }
 }
-}
+
   componentDidMount() {
       this.FetchLocation();
        setTimeout(() => {
           this.Searching()
        }, 500)
-       console.log("component mounted 1")
+      //  console.log("component mounted App.tsx")
+       fetch(`${APIURL}/user`,
+       { headers: 
+         { "Authorization": "Bearer "+ localStorage.getItem("token")}})
+         .then (res => res.json())
+         .then ((data) => {
+           if(data.user) {
+             this.setState({
+               isAdmin: data.user.isAdmin
+             })
+           }
+         })
     }
 
 FetchLocation = () => {
-  console.log(`${process.env.KEY}`) 
-    const APIkey: string= `AIzaSyA60T7NoarUbeA_bfM_zeq6m3dkTcTkTiQ`
+  // console.log(`${process.env.KEY}`) 
+    const APIkey: string= `${process.env.KEY}`
     
     navigator.geolocation.getCurrentPosition((position) => {
         let lat: number= position.coords.latitude;
         let lon: number= position.coords.longitude;
         console.log("Latitude is :", position.coords.latitude);
         console.log("Longitude is :", position.coords.longitude);
-    fetch(`====>https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${APIkey}`)
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${APIkey}`)
         .then(res => res.json())
         .then((data) => {
-            console.log(data)
+            // console.log(data)
             this.setState({
                 cityName: data.results[0].address_components[2].long_name,
                 zipCode: data.results[0].address_components[7].long_name
             })
-            console.log(this.state.cityName);
-            console.log(this.state.zipCode);
+            // console.log(this.state.cityName);
+            // console.log(this.state.zipCode);
         })
         .catch(console.log)
     }
@@ -136,16 +167,16 @@ FetchLocation = () => {
    :  
       <Router>
         <div>
-          <Navbar cityName= {this.state.cityName} updateToken={this.updateToken} AdminCheck={this.AdminCheck} isLoggedIn= {this.state.isLoggedIn} clearToken={this.clearToken}/>
+          <Navbar updateUserId={this.updateUserId} cityName= {this.state.cityName} updateToken={this.updateToken} AdminCheck={this.AdminCheck} isLoggedIn= {this.state.isLoggedIn} clearToken={this.clearToken}/>
           <Switch>
           <Route path="/details">
             <Details />
           </Route>
             <Route path="/myfavorites">
-              <MyFavorites />
+              <MyFavorites userId={this.state.userId} token={this.state.token}/>
             </Route>
             <Route path="/">
-              <Home zipCode= {this.state.zipCode} plantId={this.state.plantId}/>
+              <Home zipCode= {this.state.zipCode} plantId={this.state.plantId} token={this.state.token}/>
             </Route>
           </Switch>
           <Footer />

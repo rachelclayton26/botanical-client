@@ -13,6 +13,7 @@ type Nav = {
     password: string;
     isLoggingIn: boolean;
     user: User;
+    isLoggedIn: boolean
   }
 
 type User = {
@@ -42,12 +43,13 @@ class Navbar extends Component<any, Nav>{
                 email: "",
                 password: "",
                 isAdmin: false
-              }
+              },
+              isLoggedIn: false
         }
       };
 
     componentDidMount(){
-        console.log(this.props.cityName)
+        // console.log(this.props.cityName)
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
@@ -62,7 +64,7 @@ class Navbar extends Component<any, Nav>{
             user: data
         });
         setTimeout(() => {
-            console.log(this.state.user)
+            // console.log(this.state.user)
         }, 500)
       }
     
@@ -72,8 +74,8 @@ class Navbar extends Component<any, Nav>{
       }
 
       handleChange(e){
-          console.log("name:", e.target.name)
-          console.log("value:", e.target.value)
+        //   console.log("name:", e.target.name)
+        //   console.log("value:", e.target.value)
         this.setState((prevstate) => ({
             ...prevstate, [e.target.name]: e.target.value as Pick<
             Nav, //I pass in a type
@@ -84,7 +86,7 @@ class Navbar extends Component<any, Nav>{
     }
 
     handleSubmit= (e) => {
-        console.log(this.state)
+        // console.log(this.state)
         e.preventDefault();
         fetch(`${APIURL}/user/register`, {
             method: 'POST',
@@ -102,9 +104,10 @@ class Navbar extends Component<any, Nav>{
         }) .then(
             (response) => response.json()
         ). then((data) => {
-            console.log(data)
+            // console.log(data)
             this.props.updateToken(data.sessionToken)
             this.props.AdminCheck(data)
+            this.props.updateUserId(data.id)
             this.handleCloseModal(data)
         }) 
         .catch((err) => console.log(err))
@@ -117,10 +120,10 @@ class Navbar extends Component<any, Nav>{
     }
 
     handleSubmit2= (e) => {
-        console.log(this.state)
+        // console.log(this.state)
         e.preventDefault();
-        console.log(this.state)
-        console.log(APIURL)
+        // console.log(this.state)
+        // console.log(APIURL)
         fetch(`${APIURL}/user/login`, {
             method: 'POST',
             body: JSON.stringify({
@@ -135,9 +138,11 @@ class Navbar extends Component<any, Nav>{
         }) .then(
             (response) => response.json()
         ). then((data) => {
-            console.log(data)
+            // console.log("User Login:", data)
             this.props.updateToken(data.sessionToken)
             this.props.AdminCheck(data)
+            this.props.updateUserId(data.user.id)
+            // console.log("User Id:", data.user.id)
             this.handleCloseModal(data)
         }) 
         .catch((err) => console.log(err))
@@ -147,10 +152,10 @@ class Navbar extends Component<any, Nav>{
                     email: "",
                     password: "",
                 })
-        // this.props.setState({
-        //         isLoggedIn: true
-        // })
-        console.log(this.state)
+        this.setState({
+                isLoggedIn: true
+        })
+        // console.log(this.state)
     }
 
     toggleModal = (e) => {
@@ -179,7 +184,7 @@ class Navbar extends Component<any, Nav>{
             <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        {this.props.isLoggedIn ? <button className="nav-item-item" id="loginBtn" onClick={this.props.clearToken}>logout</button> : <button className="nav-item-item" id="loginBtn" onClick={this.handleOpenModal}>login/ sign up</button>}
+                        {this.state.isLoggedIn ? <button className="nav-item-item" id="loginBtn" onClick={this.props.clearToken}>logout</button> : <button className="nav-item-item" id="loginBtn" onClick={this.handleOpenModal}>login/ sign up</button>}
                         {this.state.isLoggingIn ?  
                         <div className="Modal1">
                             <Modal isOpen={this.modalState()} ariaHideApp={false} id="Modal1">
