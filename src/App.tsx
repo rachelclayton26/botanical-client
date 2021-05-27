@@ -21,8 +21,8 @@ type GeoState = {
   isAdmin: boolean
   token: string
   isLoggedIn: boolean
-  plantId: number
-  userId: number
+  plantId: number | null
+  userId: number | null
 }
 
 //In order to call functions/methods in the App.tsx (root) file of your react legacy application, you must change the function App() to a class component--ie. class App extends React.Component, then if using typscript, must call the interface or type after that class declaration (see below)
@@ -38,8 +38,8 @@ class App extends React.Component<{}, GeoState> {
         isAdmin: false,
         token: tmpToken? tmpToken : "",
         isLoggedIn: false,
-        plantId: 0,
-        userId: 0
+        plantId: null,
+        userId: null
     }
   };
 
@@ -129,7 +129,7 @@ FetchLocation = () => {
         let lon: number= position.coords.longitude;
         console.log("Latitude is :", position.coords.latitude);
         console.log("Longitude is :", position.coords.longitude)
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${APIkey}`)
+    fetch(` ===>  https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${APIkey}`)
         .then(res => res.json())
         .then((data) => {
             console.log(data)

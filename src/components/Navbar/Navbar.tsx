@@ -49,9 +49,13 @@ class Navbar extends Component<any, Nav>{
       };
 
     componentDidMount(){
-        // console.log(this.props.cityName)
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
+        if (localStorage.getItem("token")) {
+            this.setState({
+                isLoggedIn: true
+            })
+        }
     }
 
     handleOpenModal= () => {

@@ -6,8 +6,8 @@ type ZipState = {
     zipCode: string | null
     zone: string | null
     plantResults: PlantResults[]
-    userId: number,
-    plantId: number
+    userId: number| null,
+    plantId: number | null
   }
 
 type PlantResults = {
@@ -27,10 +27,10 @@ type PlantResults = {
 }
 
 type HomeProps = {
-    plantId: number
+    plantId: number | null
     zipCode: string | null
     token: string
-    userId: number
+    userId: number | null
 }
 // const CardImg3 = styled.img`
 // &:hover{
@@ -60,8 +60,8 @@ class Home extends Component <HomeProps, ZipState>{
                 description: "",
             }
             ],
-           userId: 0,
-           plantId: 0
+           userId: null,
+           plantId: null
         }
       };
       
@@ -123,7 +123,8 @@ class Home extends Component <HomeProps, ZipState>{
                fav: {
 
 // THIS IS THE ISSUE FOR THE "LIKE BUTTON"-BOTH COME BACK AS 0, THEY ARE ALSO COMING BACK AS 0 ON LINE 183 of EDITDELETE.tsx
-                   userId: this.props.userId,
+                   userId: 1,
+                   //should be this.props.userId
                    plantId: plantId
                }
             }),
